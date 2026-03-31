@@ -3,2272 +3,433 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interns At Hammad Technologies | Document Builder</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+  <title>ProjectHelper | Nigerian Research Topic Discovery SaaS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    :root{
-      --primary:#2563eb;
-      --primary-dark:#1d4ed8;
-      --dark:#0f172a;
-      --text:#1e293b;
-      --muted:#64748b;
-      --soft:#eff6ff;
-      --border:#e2e8f0;
-      --success:#16a34a;
-      --danger:#dc2626;
-      --body-bg:#ffffff;
-      --card-bg:#ffffff;
-      --section-bg:#f8fbff;
-      --preview-bg:#ffffff;
-      --nav-bg:rgba(255,255,255,.94);
-      --shadow:0 20px 50px rgba(15,23,42,.08);
-      --radius:24px;
-    }
-
-    [data-theme="dark"]{
-      --primary:#60a5fa;
-      --primary-dark:#3b82f6;
-      --dark:#f8fafc;
-      --text:#e2e8f0;
-      --muted:#94a3b8;
-      --soft:#0f1b33;
-      --border:#23304a;
-      --body-bg:#020817;
-      --card-bg:#0f172a;
-      --section-bg:#081120;
-      --preview-bg:#0b1220;
-      --nav-bg:rgba(2,8,23,.94);
-      --shadow:0 20px 50px rgba(0,0,0,.25);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Inter',sans-serif;
-      color:var(--text);
-      background:var(--body-bg);
-      transition:.25s ease;
-    }
-
-    .navbar{
-      background:var(--nav-bg)!important;
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-    }
-
-    .navbar-brand{
-      font-weight:800;
-      color:var(--dark)!important;
-      letter-spacing:-.5px;
-    }
-
-    .brand-icon{
-      width:42px;
-      height:42px;
-      border-radius:14px;
-      background:linear-gradient(135deg,var(--primary),#60a5fa);
-      color:#fff;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-      margin-right:10px;
-      box-shadow:0 12px 28px rgba(37,99,235,.22);
-    }
-
-    .nav-link{
-      font-weight:600;
-      color:var(--text)!important;
-    }
-
-    .btn-main{
-      background:linear-gradient(135deg,var(--primary),#3b82f6);
-      border:none;
-      color:#fff;
-      border-radius:14px;
-      padding:12px 20px;
-      font-weight:700;
-      box-shadow:0 12px 24px rgba(37,99,235,.18);
-    }
-
-    .btn-main:hover{
-      background:linear-gradient(135deg,var(--primary-dark),var(--primary));
-      color:#fff;
-    }
-
-    .btn-soft{
-      background:var(--soft);
-      color:var(--primary);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px 20px;
-      font-weight:700;
-    }
-
-    .btn-soft:hover{
-      background:rgba(59,130,246,.12);
-      color:var(--primary-dark);
-    }
-
-    .btn-outline-custom{
-      border:1px solid var(--border);
-      color:var(--text);
-      border-radius:14px;
-      padding:12px 20px;
-      font-weight:700;
-      background:transparent;
-    }
-
-    .btn-outline-custom:hover{
-      background:var(--soft);
-      color:var(--primary);
-    }
-
-    .section{padding:90px 0}
-    .section-title{
-      font-size:clamp(2rem,4vw,3rem);
-      font-weight:800;
-      letter-spacing:-1px;
-      margin-bottom:12px;
-      color:var(--dark);
-    }
-    .section-subtitle{
-      color:var(--muted);
-      line-height:1.8;
-      max-width:760px;
-      margin:0 auto;
-    }
-
-    .hero{
-      padding:120px 0 80px;
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 28%),
-        radial-gradient(circle at right, rgba(59,130,246,.10), transparent 30%),
-        linear-gradient(180deg,var(--section-bg) 0%, var(--body-bg) 74%);
-    }
-
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      background:var(--soft);
-      color:var(--primary);
-      border:1px solid var(--border);
-      padding:10px 16px;
-      border-radius:999px;
-      font-size:.92rem;
-      font-weight:700;
-      margin-bottom:18px;
-    }
-
-    .hero h1{
-      font-size:clamp(2.5rem,5vw,4.6rem);
-      font-weight:800;
-      line-height:1.04;
-      letter-spacing:-1.8px;
-      margin-bottom:18px;
-      color:var(--dark);
-    }
-
-    .hero p{
-      color:var(--muted);
-      font-size:1.06rem;
-      line-height:1.85;
-      max-width:620px;
-      margin-bottom:28px;
-    }
-
-    .hero-card{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:30px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      position:relative;
-    }
-
-    .hero-card img{
-      width:100%;
-      height:430px;
-      object-fit:cover;
-      border-radius:22px;
-    }
-
-    .floating-box{
-      position:absolute;
-      left:-18px;
-      bottom:34px;
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-      border-radius:18px;
-      padding:16px 18px;
-      max-width:250px;
-    }
-
-    .floating-box h6{
-      font-weight:800;
-      margin:0 0 4px;
-      color:var(--dark);
-    }
-
-    .floating-box small{
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .card-modern{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:28px;
-      height:100%;
-      box-shadow:0 12px 35px rgba(15,23,42,.05);
-      transition:.25s ease;
-    }
-
-    .card-modern:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 40px rgba(15,23,42,.08);
-    }
-
-    .icon-box{
-      width:58px;
-      height:58px;
-      border-radius:18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:var(--soft);
-      color:var(--primary);
-      font-size:1.15rem;
-      font-weight:800;
-      margin-bottom:16px;
-    }
-
-    .card-modern h5{
-      font-weight:800;
-      margin-bottom:12px;
-      color:var(--dark);
-    }
-
-    .card-modern p{
-      color:var(--muted);
-      line-height:1.75;
-      margin-bottom:0;
-    }
-
-    .showcase{
-      background:linear-gradient(180deg,var(--section-bg) 0%, var(--body-bg) 100%);
-    }
-
-    .showcase-box{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:30px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-
-    .showcase-box img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      min-height:420px;
-    }
-
-    .showcase-content{padding:38px}
-    .showcase-content h3{
-      font-weight:800;
-      font-size:2rem;
-      margin-bottom:14px;
-      color:var(--dark);
-    }
-    .showcase-content p{
-      color:var(--muted);
-      line-height:1.85;
-    }
-
-    .mini-list{
-      list-style:none;
-      padding:0;
-      margin:24px 0 0;
-    }
-
-    .mini-list li{
-      display:flex;
-      gap:12px;
-      margin-bottom:14px;
-      color:var(--text);
-      font-weight:500;
-    }
-
-    .mini-list li span{
-      width:28px;
-      height:28px;
-      min-width:28px;
-      border-radius:999px;
-      background:#dcfce7;
-      color:var(--success);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:.86rem;
-      font-weight:800;
-      margin-top:2px;
-    }
-
-    .generator-wrap{
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .generator-form{
-      padding:30px;
-      background:var(--card-bg);
-    }
-
-    .generator-preview{
-      padding:30px;
-      background:var(--section-bg);
-      border-left:1px solid var(--border);
-    }
-
-    .pane-title{
-      font-size:1.2rem;
-      font-weight:800;
-      margin-bottom:16px;
-      color:var(--dark);
-    }
-
-    .form-label{
-      font-weight:600;
-      color:var(--text);
-      margin-bottom:8px;
-    }
-
-    .form-control,.form-select{
-      border-radius:14px;
-      border:1px solid var(--border);
-      padding:12px 14px;
-      box-shadow:none!important;
-      background:var(--card-bg);
-      color:var(--text);
-    }
-
-    .form-control::placeholder{color:var(--muted)}
-    .form-control:focus,.form-select:focus{
-      border-color:#93c5fd;
-      background:var(--card-bg);
-      color:var(--text);
-    }
-
-    .preview-box{
-      background:#e9eef5 !important;
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:30px;
-      min-height:680px;
-      max-height:980px;
-      overflow-y:auto;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-    }
-
-    .preview-doc{
-      width:210mm;
-      min-height:297mm;
-      background:#fff !important;
-      color:#000 !important;
-      padding:22mm 18mm;
-      box-shadow:0 10px 30px rgba(15,23,42,.10);
-      font-family:"Times New Roman", Times, serif !important;
-      line-height:1.7;
-    }
-
-    .preview-doc,
-    .preview-doc h1,
-    .preview-doc h2,
-    .preview-doc p,
-    .preview-doc li,
-    .preview-doc strong,
-    .preview-doc span{
-      font-family:"Times New Roman", Times, serif !important;
-      color:#000 !important;
-    }
-
-    .preview-doc h1{
-      font-size:24pt;
-      font-weight:700;
-      margin-bottom:8px;
-      text-align:left;
-    }
-
-    .preview-doc h2{
-      font-size:14pt;
-      font-weight:700;
-      margin-top:22px;
-      margin-bottom:8px;
-      border-bottom:1.5px solid #000;
-      padding-bottom:4px;
-      text-align:left;
-    }
-
-    .preview-doc p,
-    .preview-doc li{
-      font-size:12pt;
-      text-align:justify;
-      line-height:1.75;
-      margin-bottom:8px;
-    }
-
-    .preview-doc ul{
-      padding-left:22px;
-      margin-bottom:0;
-    }
-
-    .contact-line{
-      font-size:11pt !important;
-      color:#000 !important;
-      text-align:left !important;
-      margin-bottom:14px;
-    }
-
-    .sticky-head{
-      position:sticky;
-      top:14px;
-      background:var(--section-bg);
-      z-index:2;
-      padding-bottom:12px;
-    }
-
-    .score-box{
-      border-radius:18px;
-      background:var(--soft);
-      border:1px solid var(--border);
-      padding:18px;
-    }
-
-    .stat-number{
-      font-size:2rem;
-      font-weight:800;
-      color:var(--primary);
-    }
-
-    .small-note{
-      color:var(--muted);
-      font-size:.94rem;
-    }
-
-    .keyword-chip{
-      display:inline-block;
-      padding:8px 12px;
-      margin:4px;
-      background:var(--soft);
-      border:1px solid var(--border);
-      border-radius:999px;
-      font-size:.88rem;
-      font-weight:600;
-      color:var(--primary);
-    }
-
-    .job-link{
-      display:block;
-      text-decoration:none;
-      color:inherit;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px 20px;
-      margin-bottom:14px;
-      transition:.2s ease;
-      background:var(--card-bg);
-    }
-
-    .job-link:hover{
-      border-color:#bfdbfe;
-      background:var(--soft);
-      transform:translateY(-2px);
-    }
-
-    .job-link small{
-      color:var(--muted);
-      display:block;
-      margin-top:4px;
-    }
-
-    .ad-box{
-      border:2px dashed var(--border);
-      border-radius:18px;
-      min-height:160px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:20px;
-      color:var(--muted);
-      background:var(--section-bg);
-      font-weight:600;
-    }
-
-    .cta{
-      background:linear-gradient(135deg,#0f172a 0%, #1e3a8a 100%);
-      color:#fff;
-      border-radius:34px;
-      padding:52px 38px;
-      box-shadow:var(--shadow);
-    }
-
-    .cta h2{
-      font-weight:800;
-      font-size:clamp(2rem,4vw,3rem);
-      margin-bottom:12px;
-      letter-spacing:-1px;
-    }
-
-    .cta p{
-      color:rgba(255,255,255,.82);
-      max-width:760px;
-      margin:0 auto 22px;
-      line-height:1.8;
-    }
-
-    .contact-icon{
-      width:62px;
-      height:62px;
-      border-radius:18px;
-      background:var(--soft);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      color:var(--primary);
-      text-decoration:none;
-      border:1px solid var(--border);
-      transition:.25s ease;
-    }
-
-    .contact-icon:hover{
-      transform:translateY(-4px);
-      background:var(--primary);
-      color:#fff;
-    }
-
-    .floating-contact{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      z-index:999;
-    }
-
-    .floating-contact a{
-      width:55px;
-      height:55px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-size:22px;
-      text-decoration:none;
-      box-shadow:0 6px 16px rgba(0,0,0,0.2);
-      transition:.3s;
-    }
-
-    .floating-contact a:hover{
-      transform:scale(1.08);
-    }
-
-    .floating-contact .wa{background:#25D366}
-    .floating-contact .ph{background:#2563eb}
-    .floating-contact .em{background:#dc2626}
-    .floating-contact .pf{background:#7c3aed}
-    .floating-contact .wb{background:#0f172a}
-
-    .profile-photo-wrap{
-      text-align:right;
-      margin-bottom:14px;
-    }
-
-    .profile-photo{
-      width:120px;
-      height:120px;
-      object-fit:cover;
-      border:1.5px solid #000;
-      border-radius:6px;
-      background:#fff;
-    }
-
-    .corporate-photo{
-      text-align:left;
-    }
-
-    .preview-doc.template-classic h1,
-    .preview-doc.template-classic h2{
-      color:#000 !important;
-    }
-
-    .preview-doc.template-modern h1{
-      color:#000 !important;
-      letter-spacing:.2px;
-    }
-
-    .preview-doc.template-modern h2{
-      color:#000 !important;
-      border-bottom:1.5px solid #000;
-    }
-
-    .preview-doc.template-minimal h1{
-      font-size:22pt;
-    }
-
-    .preview-doc.template-minimal h2{
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      font-size:13pt;
-    }
-
-    .preview-doc.template-corporate{
-      border-left:6px solid #000;
-      padding-left:16mm;
-    }
-
-    .preview-doc.template-corporate h1{
-      font-size:25pt;
-    }
-
-    .preview-doc.template-corporate .profile-photo-wrap{
-      text-align:left;
-      margin-bottom:18px;
-    }
-
-    .preview-doc.template-corporate .profile-photo{
-      width:130px;
-      height:130px;
-      border-radius:4px;
-    }
-
-    footer{
-      background:#0f172a;
-      color:#cbd5e1;
-      padding:28px 0;
-      margin-top:80px;
-    }
-
-    @media (max-width:991.98px){
-      .hero{padding-top:95px}
-      .hero-card{margin-top:28px}
-      .floating-box{
-        position:static;
-        max-width:none;
-        margin-top:16px;
-      }
-      .generator-preview{
-        border-left:none;
-        border-top:1px solid var(--border);
-      }
-      .preview-box{
-        min-height:430px;
-        padding:14px;
-      }
-      .preview-doc{
-        width:100%;
-        min-height:auto;
-        padding:20px;
-      }
-      .showcase-content{padding:28px}
-      .floating-contact{
-        right:12px;
-        bottom:12px;
-      }
-    }
-
-    @page{
-      size:A4;
-      margin:14mm;
-    }
-
-    @media print{
-      html, body{
-        background:#fff !important;
-      }
-
-      body *{
-        visibility:hidden;
-      }
-
-      #previewContent,
-      #previewContent *{
-        visibility:visible;
-      }
-
-      #previewContent{
-        position:absolute;
-        left:0;
-        top:0;
-        width:210mm;
-        min-height:297mm;
-        margin:0;
-        padding:18mm 16mm;
-        background:#fff !important;
-        color:#000 !important;
-        box-shadow:none !important;
-        border:none !important;
-        font-family:"Times New Roman", Times, serif !important;
-      }
-
-      #previewContent h1,
-      #previewContent h2,
-      #previewContent p,
-      #previewContent li,
-      #previewContent span,
-      #previewContent strong{
-        color:#000 !important;
-        font-family:"Times New Roman", Times, serif !important;
-      }
-
-      #previewContent p,
-      #previewContent li{
-        text-align:justify !important;
-      }
-
-      .profile-photo{
-        border:1px solid #000 !important;
-      }
-    }
+    :root {
+      --bg:#f8fafc; --surface:#ffffff; --text:#0f172a; --muted:#64748b; --primary:#2563eb; --border:#e2e8f0;
+      --shadow:0 10px 30px rgba(2,6,23,.08);
+    }
+    [data-theme="dark"] { --bg:#020617; --surface:#0f172a; --text:#e2e8f0; --muted:#94a3b8; --primary:#60a5fa; --border:#1e293b; }
+    body { font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--text); }
+    .navbar { backdrop-filter: blur(10px); background: color-mix(in srgb,var(--bg) 88%, transparent)!important; border-bottom:1px solid var(--border); }
+    .hero { padding:120px 0 72px; background: radial-gradient(circle at 10% 10%,rgba(37,99,235,.18),transparent 30%); }
+    .section { padding:80px 0; }
+    .card-ui { background:var(--surface); border:1px solid var(--border); border-radius:20px; box-shadow:var(--shadow); }
+    .btn-main { background:var(--primary); color:#fff; border:none; border-radius:12px; padding:.65rem 1rem; }
+    .btn-main:hover { opacity:.93; color:#fff; }
+    .topic-card { transition:.2s ease; }
+    .topic-card:hover { transform:translateY(-3px); }
+    .service-icon { width:50px; height:50px; display:flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(37,99,235,.12); color:var(--primary); }
+    .pill { font-size:.78rem; padding:.2rem .6rem; border-radius:999px; border:1px solid var(--border); background:var(--bg); }
+    .whatsapp-float { position:fixed; right:16px; bottom:16px; z-index:1000; }
+    .nav-link, .navbar-brand, .form-label, .card-title, .modal-title { color:var(--text)!important; }
+    .form-control, .form-select, .input-group-text, .list-group-item { background:var(--surface); color:var(--text); border-color:var(--border); }
+    footer { background:#0b1220; color:#cbd5e1; }
   </style>
 </head>
 <body>
-
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#home">
-        <span class="brand-icon">IH</span> Interns At Hammad Technologies
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-          <li class="nav-item"><a class="nav-link" href="#builder">Builder</a></li>
+      <a class="navbar-brand fw-bold" href="#home"><i class="bi bi-journal-bookmark-fill text-primary"></i> ProjectHelper</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#opportunities">Opportunities</a></li>
+          <li class="nav-item"><a class="nav-link" href="#explorer">Topics Explorer</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item ms-lg-2">
-            <button class="btn btn-outline-custom" onclick="toggleTheme()">🌙 Mode</button>
-          </li>
-          <li class="nav-item ms-lg-2">
-            <a class="btn btn-main" href="#builder">Create Document</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#hire">Hire Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#admin">Admin</a></li>
         </ul>
+        <button id="themeToggle" class="btn btn-outline-primary btn-sm"><i class="bi bi-moon-stars"></i></button>
       </div>
     </div>
   </nav>
 
-  <section class="hero" id="home">
+  <section id="home" class="hero">
     <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="hero-badge">Professional Document Builder</div>
-          <h1>Create professional CVs, resumes, and letters with ease</h1>
-          <p>
-            Prepare polished documents for jobs, internships, NYSC, scholarships, and professional applications in one place.
-          </p>
-          <div class="d-flex flex-wrap gap-3">
-            <a href="#builder" class="btn btn-main">Start Now</a>
-            <a href="#contact" class="btn btn-soft">Contact</a>
-          </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <span class="pill">Built for Nigerian Universities</span>
+          <h1 class="display-5 fw-bold mt-3">Find your project topic with abstract in seconds.</h1>
+          <p class="text-secondary">ProjectHelper helps students discover realistic, department-aligned project topics with smart filtering, recommendations, bookmarks, and PDF export.</p>
+          <a href="#explorer" class="btn btn-main me-2">Explore Topics</a>
+          <a href="#hire" class="btn btn-outline-primary">Order Research Help</a>
         </div>
-
-        <div class="col-lg-6">
-          <div class="hero-card">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Document builder workspace">
-            <div class="floating-box">
-              <h6>All-in-One Document Support</h6>
-              <small>CV, Resume, Cover Letter, Internship Letter, NYSC Letter, Scholarship Letter, Job Application Letter, and Resignation Letter.</small>
-            </div>
+        <div class="col-lg-5">
+          <div class="card-ui p-4">
+            <h5>Live Platform Stats</h5>
+            <div class="d-flex justify-content-between mt-3"><span>Universities</span><strong id="statUniversities">0</strong></div>
+            <div class="d-flex justify-content-between"><span>Departments</span><strong id="statDepartments">0</strong></div>
+            <div class="d-flex justify-content-between"><span>Topics</span><strong id="statTopics">0</strong></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="features">
+  <section id="about" class="section">
+    <div class="container card-ui p-4 p-lg-5">
+      <h2 class="fw-bold">About ProjectHelper</h2>
+      <p class="text-secondary mb-0">We are a SaaS research discovery platform focused on students in Nigerian institutions. We combine a structured university database with smart topic generation and practical academic support services.</p>
+    </div>
+  </section>
+
+  <section id="services" class="section pt-0">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Everything you need to prepare professional documents</h2>
-        <p class="section-subtitle">
-          Create, organize, and customize your career documents with a clean and easy-to-use platform.
-        </p>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-6 col-xl-3">
-          <div class="card-modern">
-            <div class="icon-box">CV</div>
-            <h5>Multiple Document Types</h5>
-            <p>Create CVs, resumes, cover letters, internship letters, NYSC letters, scholarship letters, job application letters, and resignation letters.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-          <div class="card-modern">
-            <div class="icon-box">TS</div>
-            <h5>Template Styles</h5>
-            <p>Choose Classic, Modern, Minimal, or Corporate styles for CVs and resumes with an instant preview update.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-          <div class="card-modern">
-            <div class="icon-box">DOC</div>
-            <h5>Professional Export</h5>
-            <p>Copy your document, print it as PDF, or download it as a Microsoft Word DOCX file.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-          <div class="card-modern">
-            <div class="icon-box">PH</div>
-            <h5>Profile Photo Support</h5>
-            <p>Add a profile photo to CVs and resumes, especially for modern and corporate layouts.</p>
-          </div>
-        </div>
-      </div>
+      <h2 class="fw-bold mb-4">Services</h2>
+      <div class="row g-3" id="servicesGrid"></div>
     </div>
   </section>
 
-  <section class="section showcase">
+  <section id="explorer" class="section pt-0">
     <div class="container">
-      <div class="showcase-box">
-        <div class="row g-0 align-items-stretch">
-          <div class="col-lg-6">
-            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Professional writing support">
-          </div>
-          <div class="col-lg-6">
-            <div class="showcase-content">
-              <h3>Built for students, graduates, and professionals</h3>
-              <p>
-                Prepare documents with a clear structure, professional layout, and organized fields that match the document type you choose.
-              </p>
-              <ul class="mini-list">
-                <li><span>✓</span> Dynamic form fields that change instantly</li>
-                <li><span>✓</span> Live preview while you work</li>
-                <li><span>✓</span> Clean formal style for letters</li>
-                <li><span>✓</span> Modern professional layout for CVs and resumes</li>
-              </ul>
-            </div>
-          </div>
+      <h2 class="fw-bold mb-3">Topics Explorer</h2>
+      <div class="card-ui p-3 p-lg-4 mb-4">
+        <div class="row g-2">
+          <div class="col-lg-4"><input id="globalSearch" class="form-control" placeholder="Search by keyword, department or field" /></div>
+          <div class="col-lg-2"><select id="filterUniversity" class="form-select"></select></div>
+          <div class="col-lg-2"><select id="filterDepartment" class="form-select"></select></div>
+          <div class="col-lg-2"><select id="filterLevel" class="form-select"><option value="">All Levels</option><option>Undergraduate</option><option>Postgraduate</option></select></div>
+          <div class="col-lg-2"><select id="filterCategory" class="form-select"><option value="">All Categories</option></select></div>
         </div>
+      </div>
+      <div class="row g-3" id="topicsGrid"></div>
+      <div class="card-ui p-4 mt-4">
+        <h5>Recommended Topics</h5>
+        <div id="recommendations" class="row g-3 mt-1"></div>
+      </div>
+      <div class="card-ui p-4 mt-4">
+        <h5>Saved Topics Dashboard</h5>
+        <div id="bookmarks" class="row g-3 mt-1"></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="builder">
+  <section id="contact" class="section pt-0">
+    <div class="container card-ui p-4">
+      <h2 class="fw-bold mb-3">Contact Us</h2>
+      <form id="contactForm" class="row g-3">
+        <div class="col-md-6"><label class="form-label">Name</label><input required id="contactName" class="form-control" /></div>
+        <div class="col-md-6"><label class="form-label">Email</label><input required type="email" id="contactEmail" class="form-control" /></div>
+        <div class="col-12"><label class="form-label">Message / Topic Request</label><textarea required id="contactMessage" rows="4" class="form-control"></textarea></div>
+        <div class="col-12"><button class="btn btn-main">Submit Message</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="hire" class="section pt-0">
+    <div class="container card-ui p-4">
+      <h2 class="fw-bold">Hire Us / Order Page</h2>
+      <p class="text-secondary">Need full project support? Click any service card or send us your project details through Contact.</p>
+      <a href="https://wa.me/2348100000000?text=Hello%20ProjectHelper%2C%20I%20need%20help%20with%20my%20research%20project" target="_blank" class="btn btn-success"><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+  </section>
+
+  <section id="admin" class="section pt-0">
     <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Document Builder</h2>
-        <p class="section-subtitle">
-          Select a document type, enter your details, and generate a professional document instantly.
-        </p>
+      <h2 class="fw-bold mb-3">Admin Dashboard</h2>
+      <div class="card-ui p-4 mb-3" id="authBox">
+        <h5>Admin Login</h5>
+        <div class="row g-2">
+          <div class="col-md-4"><input id="adminEmail" class="form-control" placeholder="Email" value="admin@projecthelper.ng" /></div>
+          <div class="col-md-4"><input id="adminPassword" type="password" class="form-control" placeholder="Password" value="admin123" /></div>
+          <div class="col-md-4"><button id="loginBtn" class="btn btn-main w-100">Login</button></div>
+        </div>
       </div>
-
-      <div class="generator-wrap">
-        <div class="row g-0">
-          <div class="col-lg-5">
-            <div class="generator-form">
-              <h3 class="pane-title">Document Details</h3>
-
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label">Document Type</label>
-                  <select id="documentType" class="form-select" onchange="updateFormGroups()">
-                    <option value="cv">CV</option>
-                    <option value="resume">Resume</option>
-                    <option value="cover-letter">Cover Letter</option>
-                    <option value="internship-letter">Internship Letter</option>
-                    <option value="nysc-letter">NYSC Letter</option>
-                    <option value="scholarship-letter">Scholarship Letter</option>
-                    <option value="job-application-letter">Job Application Letter</option>
-                    <option value="resignation-letter">Resignation Letter</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Template Style</label>
-                  <select id="templateStyle" class="form-select" onchange="applyTemplate()">
-                    <option value="template-classic">Classic</option>
-                    <option value="template-modern">Modern</option>
-                    <option value="template-minimal">Minimal</option>
-                    <option value="template-corporate">Corporate</option>
-                  </select>
-                </div>
-
-                <div class="col-12" id="photoUploadField">
-                  <label class="form-label">Profile Photo</label>
-                  <input type="file" id="profilePhoto" class="form-control" accept="image/*">
-                </div>
-              </div>
-
-              <div id="commonFields" class="row g-3 mt-1">
-                <div class="col-md-6">
-                  <label class="form-label">Full Name</label>
-                  <input type="text" id="fullName" class="form-control" placeholder="Enter full name">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Professional Title</label>
-                  <input type="text" id="jobTitle" class="form-control" placeholder="e.g. Data Analyst">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Email Address</label>
-                  <input type="email" id="email" class="form-control" placeholder="Enter email address">
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Phone Number</label>
-                  <input type="text" id="phone" class="form-control" placeholder="Enter phone number">
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Address</label>
-                  <input type="text" id="address" class="form-control" placeholder="Enter address">
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label">Professional Summary / Introduction</label>
-                  <textarea id="summary" class="form-control" rows="4" placeholder="Write a short summary"></textarea>
-                </div>
-              </div>
-
-              <div id="cvFields" class="doc-group row g-3 mt-1">
-                <div class="col-12">
-                  <label class="form-label">Education</label>
-                  <textarea id="cvEducation" class="form-control" rows="3" placeholder="Enter education details"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Skills</label>
-                  <textarea id="cvSkills" class="form-control" rows="3" placeholder="Enter skills separated by commas"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Work Experience</label>
-                  <textarea id="cvExperience" class="form-control" rows="4" placeholder="Enter work experience"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Certifications</label>
-                  <textarea id="cvCertifications" class="form-control" rows="2" placeholder="Enter certifications"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Projects</label>
-                  <textarea id="cvProjects" class="form-control" rows="2" placeholder="Enter projects"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Languages</label>
-                  <textarea id="cvLanguages" class="form-control" rows="2" placeholder="Enter languages"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Awards / Achievements</label>
-                  <textarea id="cvAwards" class="form-control" rows="2" placeholder="Enter awards or achievements"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Referees</label>
-                  <div id="refereeContainer">
-                    <div class="referee-item border rounded-4 p-3 mb-3">
-                      <div class="row g-3">
-                        <div class="col-md-4">
-                          <input type="text" class="form-control referee-name" placeholder="Referee Name">
-                        </div>
-                        <div class="col-md-4">
-                          <input type="text" class="form-control referee-position" placeholder="Position / Organization">
-                        </div>
-                        <div class="col-md-4">
-                          <input type="text" class="form-control referee-contact" placeholder="Phone or Email">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-soft mt-2" onclick="addRefereeField()">+ Add Referee</button>
-                </div>
-              </div>
-
-              <div id="resumeFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-12">
-                  <label class="form-label">Core Skills</label>
-                  <textarea id="resumeSkills" class="form-control" rows="3" placeholder="Enter core skills"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Relevant Experience</label>
-                  <textarea id="resumeExperience" class="form-control" rows="4" placeholder="Enter relevant experience"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Education</label>
-                  <textarea id="resumeEducation" class="form-control" rows="3" placeholder="Enter education"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Projects / Certifications</label>
-                  <textarea id="resumeProjects" class="form-control" rows="3" placeholder="Enter projects or certifications"></textarea>
-                </div>
-              </div>
-
-              <div id="coverLetterFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Name</label>
-                  <input type="text" id="coverRecipient" class="form-control" placeholder="Enter recipient name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Position</label>
-                  <input type="text" id="coverRecipientPosition" class="form-control" placeholder="Enter recipient position">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Name</label>
-                  <input type="text" id="coverCompany" class="form-control" placeholder="Enter company name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Address</label>
-                  <input type="text" id="coverCompanyAddress" class="form-control" placeholder="Enter company address">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Job Title Applying For</label>
-                  <input type="text" id="coverJobTitle" class="form-control" placeholder="Enter job title">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Key Strengths / Highlights</label>
-                  <textarea id="coverStrengths" class="form-control" rows="4" placeholder="Enter key strengths"></textarea>
-                </div>
-              </div>
-
-              <div id="internshipFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Name</label>
-                  <input type="text" id="internRecipient" class="form-control" placeholder="Enter recipient name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Name</label>
-                  <input type="text" id="internCompany" class="form-control" placeholder="Enter company name">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Company Address</label>
-                  <input type="text" id="internCompanyAddress" class="form-control" placeholder="Enter company address">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">School / University</label>
-                  <input type="text" id="internSchool" class="form-control" placeholder="Enter school or university">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Department / Course</label>
-                  <input type="text" id="internDepartment" class="form-control" placeholder="Enter department or course">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Level / Year of Study</label>
-                  <input type="text" id="internLevel" class="form-control" placeholder="e.g. 300 Level">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Internship Position</label>
-                  <input type="text" id="internPosition" class="form-control" placeholder="Enter internship position">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Why You Want the Internship</label>
-                  <textarea id="internReason" class="form-control" rows="4" placeholder="Explain why you want the internship"></textarea>
-                </div>
-              </div>
-
-              <div id="nyscFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Name</label>
-                  <input type="text" id="nyscRecipient" class="form-control" placeholder="Enter recipient name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Position</label>
-                  <input type="text" id="nyscRecipientPosition" class="form-control" placeholder="Enter recipient position">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">PPA / Organization Name</label>
-                  <input type="text" id="nyscPpa" class="form-control" placeholder="Enter PPA or organization name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">State Code</label>
-                  <input type="text" id="nyscStateCode" class="form-control" placeholder="Enter state code">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Call-Up Number</label>
-                  <input type="text" id="nyscCallUp" class="form-control" placeholder="Enter call-up number">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Batch / Stream</label>
-                  <input type="text" id="nyscBatch" class="form-control" placeholder="e.g. Batch A Stream I">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Purpose of Letter</label>
-                  <input type="text" id="nyscPurpose" class="form-control" placeholder="e.g. Request for allowance">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Reason / Request Details</label>
-                  <textarea id="nyscReason" class="form-control" rows="4" placeholder="Enter request details"></textarea>
-                </div>
-              </div>
-
-              <div id="scholarshipFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Scholarship Name</label>
-                  <input type="text" id="scholarshipName" class="form-control" placeholder="Enter scholarship name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Recipient / Committee Name</label>
-                  <input type="text" id="scholarshipRecipient" class="form-control" placeholder="Enter committee name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">School / University</label>
-                  <input type="text" id="scholarshipSchool" class="form-control" placeholder="Enter school or university">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Course / Program</label>
-                  <input type="text" id="scholarshipCourse" class="form-control" placeholder="Enter course or program">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Academic Achievements</label>
-                  <textarea id="scholarshipAchievements" class="form-control" rows="3" placeholder="Enter academic achievements"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Leadership / Community Service</label>
-                  <textarea id="scholarshipLeadership" class="form-control" rows="3" placeholder="Enter leadership or community service"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Why You Need the Scholarship</label>
-                  <textarea id="scholarshipNeed" class="form-control" rows="3" placeholder="Explain why you need the scholarship"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Career Goals</label>
-                  <textarea id="scholarshipGoals" class="form-control" rows="3" placeholder="Enter career goals"></textarea>
-                </div>
-              </div>
-
-              <div id="jobApplicationFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Name</label>
-                  <input type="text" id="jobRecipient" class="form-control" placeholder="Enter recipient name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Position</label>
-                  <input type="text" id="jobRecipientPosition" class="form-control" placeholder="Enter recipient position">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Name</label>
-                  <input type="text" id="jobCompany" class="form-control" placeholder="Enter company name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Address</label>
-                  <input type="text" id="jobCompanyAddress" class="form-control" placeholder="Enter company address">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Job Title Applying For</label>
-                  <input type="text" id="jobApplyingFor" class="form-control" placeholder="Enter job title">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Where You Saw the Job</label>
-                  <input type="text" id="jobSource" class="form-control" placeholder="e.g. Company website">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Why You Are Interested</label>
-                  <textarea id="jobInterest" class="form-control" rows="3" placeholder="Explain your interest"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Key Skills / Experience</label>
-                  <textarea id="jobSkills" class="form-control" rows="3" placeholder="Enter key skills or experience"></textarea>
-                </div>
-              </div>
-
-              <div id="resignationFields" class="doc-group row g-3 mt-1" style="display:none;">
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Name</label>
-                  <input type="text" id="resRecipient" class="form-control" placeholder="Enter recipient name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Recipient Position</label>
-                  <input type="text" id="resRecipientPosition" class="form-control" placeholder="Enter recipient position">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Company Name</label>
-                  <input type="text" id="resCompany" class="form-control" placeholder="Enter company name">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Current Job Title</label>
-                  <input type="text" id="resCurrentRole" class="form-control" placeholder="Enter current job title">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Resignation Effective Date</label>
-                  <input type="text" id="resEffectiveDate" class="form-control" placeholder="e.g. 30 April 2026">
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Reason for Resignation</label>
-                  <textarea id="resReason" class="form-control" rows="3" placeholder="Enter resignation reason"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Appreciation Message</label>
-                  <textarea id="resAppreciation" class="form-control" rows="3" placeholder="Write appreciation message"></textarea>
-                </div>
-                <div class="col-12">
-                  <label class="form-label">Transition Support Note</label>
-                  <textarea id="resTransition" class="form-control" rows="3" placeholder="Write transition note"></textarea>
-                </div>
-              </div>
-
-              <div class="row g-3 mt-2">
-                <div class="col-12">
-                  <label class="form-label">Paste Job Description for Keyword Helper</label>
-                  <textarea id="jobDescription" class="form-control" rows="4" placeholder="Paste job description here"></textarea>
-                </div>
-
-                <div class="col-12 d-flex flex-wrap gap-2 pt-2">
-                  <button class="btn btn-main" onclick="generateDocument()">Generate</button>
-                  <button class="btn btn-soft" onclick="copyText()">Copy Text</button>
-                  <button class="btn btn-outline-custom" onclick="printDocument()">Print / Save PDF</button>
-                  <button class="btn btn-outline-custom" onclick="downloadDocx()">Download DOCX</button>
-                  <button class="btn btn-outline-custom" onclick="clearForm()">Clear</button>
-                </div>
-              </div>
-            </div>
+      <div id="adminPanel" class="d-none">
+        <div class="card-ui p-4 mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Manage Universities, Departments & Topics</h5>
+            <button id="logoutBtn" class="btn btn-outline-danger btn-sm">Logout</button>
           </div>
-
-          <div class="col-lg-7">
-            <div class="generator-preview">
-              <div class="sticky-head">
-                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-                  <div>
-                    <h3 class="pane-title mb-1">Live Preview</h3>
-                    <p class="small-note mb-0">Review your document before printing, copying, or downloading as Word.</p>
-                  </div>
-                  <div class="score-box text-center">
-                    <div class="small-note">Profile Score</div>
-                    <div class="stat-number" id="resumeScore">0%</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="preview-box mt-3">
-                <div id="previewContent" class="preview-doc template-classic">
-                  <h1>Document Preview</h1>
-                  <p class="contact-line">Your generated document will appear here.</p>
-                  <h2>Welcome</h2>
-                  <p>
-                    Select a document type, fill in your details, and click <strong>Generate</strong>.
-                  </p>
-                  <h2>Available Documents</h2>
-                  <ul>
-                    <li>CV</li>
-                    <li>Resume</li>
-                    <li>Cover Letter</li>
-                    <li>Internship Letter</li>
-                    <li>NYSC Letter</li>
-                    <li>Scholarship Letter</li>
-                    <li>Job Application Letter</li>
-                    <li>Resignation Letter</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="card-modern mt-4">
-                <h5>Keyword Suggestions</h5>
-                <p class="small-note mb-3">Repeated useful words from the pasted job description will appear below.</p>
-                <div id="keywordResults"></div>
-                <div class="mt-3">
-                  <button class="btn btn-soft" onclick="extractKeywords()">Extract Keywords</button>
-                </div>
-              </div>
-            </div>
+          <div class="row g-2">
+            <div class="col-md-4"><input id="newUniversity" class="form-control" placeholder="University name" /></div>
+            <div class="col-md-4"><input id="newDepartment" class="form-control" placeholder="Department name" /></div>
+            <div class="col-md-4"><button id="addDeptBtn" class="btn btn-main w-100">Add University + Department</button></div>
+            <div class="col-md-3"><select id="topicUniversity" class="form-select"></select></div>
+            <div class="col-md-3"><input id="topicDepartment" class="form-control" placeholder="Department" /></div>
+            <div class="col-md-3"><input id="topicTitle" class="form-control" placeholder="Topic title" /></div>
+            <div class="col-md-3"><input id="topicCategory" class="form-control" placeholder="Category" /></div>
+            <div class="col-md-6"><textarea id="topicAbstract" class="form-control" rows="2" placeholder="Short abstract"></textarea></div>
+            <div class="col-md-3"><select id="topicLevel" class="form-select"><option>Undergraduate</option><option>Postgraduate</option></select></div>
+            <div class="col-md-3"><button id="addTopicBtn" class="btn btn-main w-100">Add Topic</button></div>
           </div>
         </div>
-      </div><!-- generator-wrap -->
-    </div>
-  </section>
-
-  <section class="section showcase" id="services">
-    <div class="container">
-      <div class="showcase-box">
-        <div class="row g-0 align-items-stretch">
-          <div class="col-lg-6 order-lg-2">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Professional support">
-          </div>
-
-          <div class="col-lg-6 order-lg-1">
-            <div class="showcase-content">
-              <h3>Professional Writing Support</h3>
-              <p>
-                Get help with CV writing, cover letters, internship applications, scholarship letters, and other professional documents.
-              </p>
-
-              <div class="row g-3 mt-2">
-                <div class="col-sm-6">
-                  <div class="card-modern h-100">
-                    <h5>CV Support</h5>
-                    <p>Professional help with CV writing, structure, and presentation.</p>
-                  </div>
-                </div>
-
-                <div class="col-sm-6">
-                  <div class="card-modern h-100">
-                    <h5>Letter Writing</h5>
-                    <p>Support for cover letters, internship letters, scholarship letters, and more.</p>
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="card-modern">
-                    <h5>Contact for Assistance</h5>
-                    <p>Reach out directly through WhatsApp, phone, email, portfolio, or website links below.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-4">
-                <a href="https://wa.me/2348028151367" target="_blank" class="btn btn-main">WhatsApp Support</a>
-              </div>
-            </div>
-          </div>
+        <div class="card-ui p-4 mb-3">
+          <h5>User Messages</h5>
+          <div id="messagesList" class="list-group"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="opportunities">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Opportunities and Resources</h2>
-        <p class="section-subtitle">
-          Explore helpful resources, opportunities, and useful platforms related to study, work, and document preparation.
-        </p>
-      </div>
+  <a class="btn btn-success whatsapp-float" href="https://wa.me/2348100000000?text=Hello%20ProjectHelper" target="_blank"><i class="bi bi-whatsapp"></i></a>
 
-      <div class="row g-4 mb-4">
-        <div class="col-lg-8">
-          <div class="card-modern">
-            <h5 class="fw-bold mb-3">Featured Resource Area</h5>
-            <div class="ad-box">
-              This section can be used for featured opportunities, useful announcements, or important updates.
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="card-modern">
-            <h5 class="fw-bold mb-3">Quick Access</h5>
-            <div class="ad-box">
-              Add scholarship links, training updates, job resources, or important notice cards here.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="showcase-box">
-        <div class="row g-0 align-items-stretch">
-          <div class="col-lg-6">
-            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Career opportunities">
-          </div>
-
-          <div class="col-lg-6">
-            <div class="showcase-content">
-              <h3>Career Opportunities</h3>
-              <p>
-                Discover jobs, internships, scholarships, and other opportunities that match your career goals.
-              </p>
-
-              <a href="https://technexusng112-netizen.github.io/projecthelperwebsite/" target="_blank" class="job-link">
-                <strong>ProjectHelper Website</strong>
-                <small>Explore project and academic support resources</small>
-              </a>
-
-              <a href="https://technexusng112-netizen.github.io/najibullah-portfolio" target="_blank" class="job-link">
-                <strong>Portfolio</strong>
-                <small>View profile, projects, and professional information</small>
-              </a>
-
-              <a href="mailto:najibualiyu112@gmail.com" class="job-link">
-                <strong>Email Contact</strong>
-                <small>Reach out directly for writing or document support</small>
-              </a>
-
-              <a href="https://wa.me/2348028151367" target="_blank" class="job-link">
-                <strong>WhatsApp Support</strong>
-                <small>Chat directly for quick assistance</small>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section text-center" id="contact">
-    <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-subtitle">
-        Gusau,Zamfara State<br>Interns At Hammad Technologies
-      </p>
-
-      <div class="d-flex justify-content-center flex-wrap gap-4 mt-4">
-        <a href="mailto:najibualiyu112@gmail.com" class="contact-icon" title="Email">
-          <i class="bi bi-envelope-fill"></i>
-        </a>
-
-        <a href="https://wa.me/2348028151367" target="_blank" class="contact-icon" title="WhatsApp">
-          <i class="bi bi-whatsapp"></i>
-        </a>
-
-        <a href="tel:+2347065405876" class="contact-icon" title="Phone">
-          <i class="bi bi-telephone-fill"></i>
-        </a>
-
-        <a href="https://technexusng112-netizen.github.io/najibullah-portfolio" target="_blank" class="contact-icon" title="Portfolio">
-          <i class="bi bi-person-workspace"></i>
-        </a>
-
-        <a href="https://technexusng112-netizen.github.io/projecthelperwebsite/" target="_blank" class="contact-icon" title="Website">
-          <i class="bi bi-globe2"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="container">
-    <div class="cta text-center">
-      <h2>Start creating your document today</h2>
-      <p>
-        Prepare a professional CV, resume, or letter in minutes with a simple and modern document builder.
-      </p>
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="#builder" class="btn btn-light fw-bold px-4 py-3 rounded-4">Create Document</a>
-        <a href="https://wa.me/2348028151367" target="_blank" class="btn btn-outline-light fw-bold px-4 py-3 rounded-4">WhatsApp</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 text-center text-md-start">
-      <div>© 2026. All rights reserved.</div>
-      <div>Interns At Hammad Technologies</div>
+  <footer class="py-4">
+    <div class="container d-flex justify-content-between flex-wrap gap-2">
+      <small>© 2026 ProjectHelper SaaS</small>
+      <small>Scalable architecture for thousands of topics and continuous updates.</small>
     </div>
   </footer>
 
-  <div class="floating-contact">
-    <a href="https://wa.me/2348028151367" target="_blank" title="WhatsApp" class="wa"><i class="bi bi-whatsapp"></i></a>
-    <a href="tel:+2347065405876" title="Call" class="ph"><i class="bi bi-telephone-fill"></i></a>
-    <a href="mailto:najibualiyu112@gmail.com" title="Email" class="em"><i class="bi bi-envelope-fill"></i></a>
-    <a href="https://technexusng112-netizen.github.io/najibullah-portfolio" target="_blank" title="Portfolio" class="pf"><i class="bi bi-person-workspace"></i></a>
-    <a href="https://technexusng112-netizen.github.io/projecthelperwebsite/" target="_blank" title="Website" class="wb"><i class="bi bi-globe2"></i></a>
-  </div>
-
-  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
   <script>
-    let profilePhotoData = "";
+    const STORAGE_KEY = "projectHelperDB";
+    const BOOKMARK_KEY = "projectHelperBookmarks";
+    const MESSAGE_KEY = "projectHelperMessages";
+    const ADMIN_AUTH_KEY = "projectHelperAdminAuth";
 
-    function getValue(id){
-      const el = document.getElementById(id);
-      return el ? el.value.trim() : "";
-    }
+    const serviceItems = [
+      ["Project Research Write-Up","End-to-end support for project documentation and chapter development."],
+      ["Seminar Writing","Well-structured seminar papers for undergraduate and postgraduate students."],
+      ["Technical Report Writing","Professional SIWES, internship, and technical field reports."],
+      ["Data Collection & Analysis","Online and offline data gathering, cleaning, and advanced analysis."],
+      ["Project Correction & Editing","Refine drafts for clarity, structure, references, and academic tone."],
+      ["PowerPoint Presentation Design","Clean, defense-ready slides with strong visuals and narrative flow."]
+    ];
 
-    function escapeHtml(text){
-      if(!text) return "";
-      return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-    }
+    function seededRand(seed) { const x = Math.sin(seed) * 10000; return x - Math.floor(x); }
+    function uid() { return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()); }
 
-    function formatParagraphs(text){
-      if(!text) return "<p>N/A</p>";
-      return text
-        .split(/\n+/)
-        .filter(line => line.trim() !== "")
-        .map(line => `<p>${escapeHtml(line)}</p>`)
-        .join("");
-    }
-
-    function formatList(text){
-      if(!text) return "<li>N/A</li>";
-      const items = text
-        .split(/,|\n/)
-        .map(item => item.trim())
-        .filter(item => item !== "");
-      if(!items.length) return "<li>N/A</li>";
-      return items.map(item => `<li>${escapeHtml(item)}</li>`).join("");
-    }
-
-    function todayDate(){
-      const d = new Date();
-      return d.toLocaleDateString(undefined,{
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-      });
-    }
-
-    function toggleTheme(){
-      const html = document.documentElement;
-      const current = html.getAttribute("data-theme");
-      const next = current === "dark" ? "light" : "dark";
-      html.setAttribute("data-theme", next);
-      localStorage.setItem("docBuilderTheme", next);
-    }
-
-    function loadTheme(){
-      const savedTheme = localStorage.getItem("docBuilderTheme");
-      if(savedTheme){
-        document.documentElement.setAttribute("data-theme", savedTheme);
-      }
-    }
-
-    function applyTemplate() {
-      const type = document.getElementById("documentType").value;
-      const selectedTemplate = document.getElementById("templateStyle").value;
-      const preview = document.getElementById("previewContent");
-
-      const letterTypes = [
-        "cover-letter",
-        "internship-letter",
-        "nysc-letter",
-        "scholarship-letter",
-        "job-application-letter",
-        "resignation-letter"
+    function generateSeedData() {
+      const universities = [
+        "University of Lagos","University of Ibadan","Ahmadu Bello University","University of Nigeria, Nsukka",
+        "Obafemi Awolowo University","University of Ilorin","Federal University of Technology, Akure","Covenant University"
       ];
-
-      if (letterTypes.includes(type)) {
-        preview.className = "preview-doc template-classic";
-        return;
-      }
-
-      preview.className = "preview-doc " + selectedTemplate;
-    }
-
-    function updateFormGroups() {
-      const type = document.getElementById("documentType").value;
-
-      const groups = [
-        "cvFields",
-        "resumeFields",
-        "coverLetterFields",
-        "internshipFields",
-        "nyscFields",
-        "scholarshipFields",
-        "jobApplicationFields",
-        "resignationFields"
-      ];
-
-      groups.forEach(id => {
-        document.getElementById(id).style.display = "none";
-      });
-
-      if (type === "cv") {
-        document.getElementById("cvFields").style.display = "flex";
-      } else if (type === "resume") {
-        document.getElementById("resumeFields").style.display = "flex";
-      } else if (type === "cover-letter") {
-        document.getElementById("coverLetterFields").style.display = "flex";
-      } else if (type === "internship-letter") {
-        document.getElementById("internshipFields").style.display = "flex";
-      } else if (type === "nysc-letter") {
-        document.getElementById("nyscFields").style.display = "flex";
-      } else if (type === "scholarship-letter") {
-        document.getElementById("scholarshipFields").style.display = "flex";
-      } else if (type === "job-application-letter") {
-        document.getElementById("jobApplicationFields").style.display = "flex";
-      } else if (type === "resignation-letter") {
-        document.getElementById("resignationFields").style.display = "flex";
-      }
-
-      const photoField = document.getElementById("photoUploadField");
-      if (type === "cv" || type === "resume") {
-        photoField.style.display = "block";
-      } else {
-        photoField.style.display = "none";
-      }
-
-      applyTemplate();
-      saveDraftToLocal();
-    }
-
-    function addRefereeField() {
-      const container = document.getElementById("refereeContainer");
-      const refereeBlock = document.createElement("div");
-      refereeBlock.className = "referee-item border rounded-4 p-3 mb-3";
-      refereeBlock.innerHTML = `
-        <div class="row g-3">
-          <div class="col-md-4">
-            <input type="text" class="form-control referee-name" placeholder="Referee Name">
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control referee-position" placeholder="Position / Organization">
-          </div>
-          <div class="col-md-3">
-            <input type="text" class="form-control referee-contact" placeholder="Phone or Email">
-          </div>
-          <div class="col-md-1 d-flex align-items-center">
-            <button type="button" class="btn btn-danger w-100" onclick="this.closest('.referee-item').remove(); saveDraftToLocal();">×</button>
-          </div>
-        </div>
-      `;
-      container.appendChild(refereeBlock);
-      attachRefereeInputListeners(refereeBlock);
-      saveDraftToLocal();
-    }
-
-    function getRefereesHTML() {
-      const items = document.querySelectorAll(".referee-item");
-      let html = "";
-
-      items.forEach(item => {
-        const name = item.querySelector(".referee-name")?.value.trim();
-        const position = item.querySelector(".referee-position")?.value.trim();
-        const contact = item.querySelector(".referee-contact")?.value.trim();
-
-        if (name || position || contact) {
-          html += `
-            <p>
-              <strong>${escapeHtml(name || "Referee Name")}</strong><br>
-              ${escapeHtml(position || "")}<br>
-              ${escapeHtml(contact || "")}
-            </p>
-          `;
-        }
-      });
-
-      return html || "<p>Available on request.</p>";
-    }
-
-    function calculateResumeScore(){
-      let score = 0;
-      if(getValue("fullName")) score += 10;
-      if(getValue("jobTitle")) score += 10;
-      if(getValue("email")) score += 5;
-      if(getValue("phone")) score += 5;
-      if(getValue("summary")) score += 15;
-
-      const type = getValue("documentType");
-
-      if(type === "cv"){
-        if(getValue("cvEducation")) score += 15;
-        if(getValue("cvSkills")) score += 15;
-        if(getValue("cvExperience")) score += 15;
-        if(getValue("cvProjects")) score += 5;
-        if(getRefereesHTML() !== "<p>Available on request.</p>") score += 5;
-      } else if(type === "resume"){
-        if(getValue("resumeSkills")) score += 15;
-        if(getValue("resumeExperience")) score += 15;
-        if(getValue("resumeEducation")) score += 15;
-        if(getValue("resumeProjects")) score += 5;
-      } else {
-        score += 10;
-        if(document.querySelector(`#${groupMap(type)} input, #${groupMap(type)} textarea`)) {
-          const inputs = document.querySelectorAll(`#${groupMap(type)} input, #${groupMap(type)} textarea`);
-          const filled = Array.from(inputs).filter(el => el.value.trim()).length;
-          score += Math.min(40, filled * 5);
-        }
-      }
-
-      if(score > 100) score = 100;
-      document.getElementById("resumeScore").innerText = score + "%";
-      return score;
-    }
-
-    function groupMap(type){
-      const map = {
-        "cv":"cvFields",
-        "resume":"resumeFields",
-        "cover-letter":"coverLetterFields",
-        "internship-letter":"internshipFields",
-        "nysc-letter":"nyscFields",
-        "scholarship-letter":"scholarshipFields",
-        "job-application-letter":"jobApplicationFields",
-        "resignation-letter":"resignationFields"
+      const departments = {
+        "Computer Science":["ICT","Engineering"], "Public Health":["Health"], "Economics":["Education"],
+        "Electrical Engineering":["Engineering","ICT"], "Business Administration":["Education"], "Mass Communication":["Education"],
+        "Nursing Science":["Health"], "Civil Engineering":["Engineering"]
       };
-      return map[type] || "cvFields";
-    }
-
-    function extractKeywords(){
-      const text = getValue("jobDescription").toLowerCase();
-      const results = document.getElementById("keywordResults");
-
-      if(!text){
-        results.innerHTML = '<p class="small-note mb-0">Paste a job description first.</p>';
-        return;
-      }
-
-      const stopWords = new Set([
-        "the","and","for","with","you","your","our","are","this","that","will","have","has","from","into","their","they",
-        "about","must","should","job","role","team","work","working","ability","skills","experience","years","year","not",
-        "but","can","all","any","who","how","what","when","where","why","also","use","using","a","an","to","of","in","on",
-        "at","or","as","be","is","it","by","we","us","if","do","required","preferred"
-      ]);
-
-      const words = text.match(/\b[a-z]{4,}\b/g) || [];
-      const counts = {};
-
-      words.forEach(word => {
-        if(!stopWords.has(word)){
-          counts[word] = (counts[word] || 0) + 1;
-        }
-      });
-
-      const sorted = Object.entries(counts)
-        .filter(([,count]) => count > 1)
-        .sort((a,b) => b[1] - a[1])
-        .slice(0,12);
-
-      if(!sorted.length){
-        results.innerHTML = '<p class="small-note mb-0">No repeated keywords found.</p>';
-        return;
-      }
-
-      results.innerHTML = sorted.map(([word,count]) =>
-        `<span class="keyword-chip">${escapeHtml(word)} (${count})</span>`
-      ).join("");
-      saveDraftToLocal();
-    }
-
-    function getPhotoHtml(type){
-      if((type === "cv" || type === "resume") && profilePhotoData){
-        const template = getValue("templateStyle");
-        const wrapClass = template === "template-corporate"
-          ? "profile-photo-wrap corporate-photo"
-          : "profile-photo-wrap";
-
-        return `
-          <div class="${wrapClass}">
-            <img src="${profilePhotoData}" alt="Profile Photo" class="profile-photo">
-          </div>
-        `;
-      }
-      return "";
-    }
-
-    function generateDocument(){
-      const type = getValue("documentType");
-      const displayName = getValue("fullName") || "Your Full Name";
-      const displayTitle = getValue("jobTitle") || "Professional Title";
-      const displayEmail = getValue("email") || "email@example.com";
-      const displayPhone = getValue("phone") || "+234 xxx xxx xxxx";
-      const displayAddress = getValue("address") || "Your Address";
-      const summary = getValue("summary");
-      const photoHtml = getPhotoHtml(type);
-      let html = "";
-
-      if(type === "cv"){
-        html = `
-          ${photoHtml}
-          <h1>${escapeHtml(displayName)}</h1>
-          <p class="contact-line">${escapeHtml(displayTitle)} | ${escapeHtml(displayEmail)} | ${escapeHtml(displayPhone)} | ${escapeHtml(displayAddress)}</p>
-
-          <h2>Professional Summary</h2>
-          ${formatParagraphs(summary || "A motivated and detail-oriented professional with strong work ethics, practical skills, and a commitment to excellence.")}
-
-          <h2>Education</h2>
-          ${formatParagraphs(getValue("cvEducation") || "Enter your educational background here.")}
-
-          <h2>Skills</h2>
-          <ul>${formatList(getValue("cvSkills") || "Communication, Teamwork, Problem Solving")}</ul>
-
-          <h2>Work Experience</h2>
-          ${formatParagraphs(getValue("cvExperience") || "Enter your work experience here.")}
-
-          <h2>Certifications</h2>
-          ${formatParagraphs(getValue("cvCertifications") || "N/A")}
-
-          <h2>Projects</h2>
-          ${formatParagraphs(getValue("cvProjects") || "N/A")}
-
-          <h2>Languages</h2>
-          <ul>${formatList(getValue("cvLanguages") || "English")}</ul>
-
-          <h2>Awards / Achievements</h2>
-          ${formatParagraphs(getValue("cvAwards") || "N/A")}
-
-          <h2>Referees</h2>
-          ${getRefereesHTML()}
-        `;
-      }
-
-      else if(type === "resume"){
-        html = `
-          ${photoHtml}
-          <h1>${escapeHtml(displayName)}</h1>
-          <p class="contact-line">${escapeHtml(displayTitle)} | ${escapeHtml(displayEmail)} | ${escapeHtml(displayPhone)} | ${escapeHtml(displayAddress)}</p>
-
-          <h2>Professional Profile</h2>
-          ${formatParagraphs(summary || "Results-driven professional with the ability to contribute value, solve problems, and support organizational goals through practical skills and dedication.")}
-
-          <h2>Core Skills</h2>
-          <ul>${formatList(getValue("resumeSkills") || "Leadership, Communication, Analytical Thinking")}</ul>
-
-          <h2>Relevant Experience</h2>
-          ${formatParagraphs(getValue("resumeExperience") || "Enter relevant work experience here.")}
-
-          <h2>Education</h2>
-          ${formatParagraphs(getValue("resumeEducation") || "Enter education details here.")}
-
-          <h2>Projects / Certifications</h2>
-          ${formatParagraphs(getValue("resumeProjects") || "N/A")}
-        `;
-      }
-
-      else if(type === "cover-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("coverRecipient") || "Hiring Manager")}</strong><br>
-            ${escapeHtml(getValue("coverRecipientPosition") || "")}<br>
-            ${escapeHtml(getValue("coverCompany") || "Company Name")}<br>
-            ${escapeHtml(getValue("coverCompanyAddress") || "")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("coverRecipient") || "Hiring Manager")},</p>
-
-          <p>
-            I am writing to express my interest in the position of <strong>${escapeHtml(getValue("coverJobTitle") || displayTitle)}</strong> at <strong>${escapeHtml(getValue("coverCompany") || "your organization")}</strong>.
-          </p>
-
-          <p>
-            ${escapeHtml(summary || "I am confident that my background, work ethic, and professional skills make me a strong candidate for this opportunity.")}
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("coverStrengths") || "My strengths include communication, teamwork, adaptability, and a strong commitment to delivering quality results.")}
-          </p>
-
-          <p>
-            Thank you for your time and consideration. I look forward to the opportunity to contribute positively to your organization.
-          </p>
-
-          <p>Sincerely,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      else if(type === "internship-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("internRecipient") || "Hiring Manager")}</strong><br>
-            ${escapeHtml(getValue("internCompany") || "Company Name")}<br>
-            ${escapeHtml(getValue("internCompanyAddress") || "")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("internRecipient") || "Hiring Manager")},</p>
-
-          <p>
-            I am writing to request an internship opportunity in your organization in the field of <strong>${escapeHtml(getValue("internPosition") || displayTitle)}</strong>.
-          </p>
-
-          <p>
-            I am currently a student of <strong>${escapeHtml(getValue("internSchool") || "my institution")}</strong>, studying <strong>${escapeHtml(getValue("internDepartment") || "my course")}</strong> at <strong>${escapeHtml(getValue("internLevel") || "my current level")}</strong>.
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("internReason") || "I am eager to gain practical knowledge, develop my skills, and learn from experienced professionals in a real work environment.")}
-          </p>
-
-          <p>
-            ${escapeHtml(summary || "I believe this internship opportunity will strengthen my professional development and allow me to contribute positively while learning.")}
-          </p>
-
-          <p>Thank you for your time and consideration.</p>
-          <p>Yours faithfully,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      else if(type === "nysc-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("nyscRecipient") || "The Management")}</strong><br>
-            ${escapeHtml(getValue("nyscRecipientPosition") || "")}<br>
-            ${escapeHtml(getValue("nyscPpa") || "Organization Name")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("nyscRecipient") || "Sir/Ma")},</p>
-
-          <p><strong>Subject: ${escapeHtml(getValue("nyscPurpose") || "NYSC Request")}</strong></p>
-
-          <p>
-            I am <strong>${escapeHtml(displayName)}</strong>, a serving corps member with State Code <strong>${escapeHtml(getValue("nyscStateCode") || "N/A")}</strong> and Call-Up Number <strong>${escapeHtml(getValue("nyscCallUp") || "N/A")}</strong>, posted to <strong>${escapeHtml(getValue("nyscPpa") || "your organization")}</strong> under <strong>${escapeHtml(getValue("nyscBatch") || "my service batch")}</strong>.
-          </p>
-
-          <p>
-            I am writing to respectfully request ${escapeHtml(getValue("nyscPurpose") || "your kind consideration")} regarding my service at your organization.
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("nyscReason") || "I would be grateful if my request is considered favourably.")}
-          </p>
-
-          <p>Thank you for your understanding and support.</p>
-          <p>Yours faithfully,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      else if(type === "scholarship-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("scholarshipRecipient") || "Scholarship Committee")}</strong><br>
-            ${escapeHtml(getValue("scholarshipName") || "Scholarship Program")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("scholarshipRecipient") || "Scholarship Committee")},</p>
-
-          <p>
-            I am writing to express my strong interest in the <strong>${escapeHtml(getValue("scholarshipName") || "scholarship opportunity")}</strong>.
-          </p>
-
-          <p>
-            I am currently studying <strong>${escapeHtml(getValue("scholarshipCourse") || "my program")}</strong> at <strong>${escapeHtml(getValue("scholarshipSchool") || "my institution")}</strong>.
-          </p>
-
-          <p>
-            ${escapeHtml(summary || "I am committed to academic excellence and to using education as a tool for personal growth and community development.")}
-          </p>
-
-          <p>
-            Academic Achievements: ${escapeHtml(getValue("scholarshipAchievements") || "N/A")}
-          </p>
-
-          <p>
-            Leadership / Community Service: ${escapeHtml(getValue("scholarshipLeadership") || "N/A")}
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("scholarshipNeed") || "This scholarship would greatly support my academic journey and reduce financial barriers to my education.")}
-          </p>
-
-          <p>
-            Career Goals: ${escapeHtml(getValue("scholarshipGoals") || "To grow professionally and make meaningful contributions in my field.")}
-          </p>
-
-          <p>Thank you for considering my application.</p>
-          <p>Sincerely,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      else if(type === "job-application-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("jobRecipient") || "Hiring Manager")}</strong><br>
-            ${escapeHtml(getValue("jobRecipientPosition") || "")}<br>
-            ${escapeHtml(getValue("jobCompany") || "Company Name")}<br>
-            ${escapeHtml(getValue("jobCompanyAddress") || "")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("jobRecipient") || "Hiring Manager")},</p>
-
-          <p>
-            I am writing to apply for the position of <strong>${escapeHtml(getValue("jobApplyingFor") || displayTitle)}</strong> as advertised through <strong>${escapeHtml(getValue("jobSource") || "your vacancy notice")}</strong>.
-          </p>
-
-          <p>
-            ${escapeHtml(summary || "I am a dedicated and motivated individual with the capacity to work effectively and contribute positively to organizational goals.")}
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("jobInterest") || "I am interested in this opportunity because it aligns with my background, interests, and long-term professional goals.")}
-          </p>
-
-          <p>
-            Key Skills / Experience: ${escapeHtml(getValue("jobSkills") || "Communication, teamwork, problem-solving, and relevant professional experience.")}
-          </p>
-
-          <p>
-            I would be grateful if my application is given favourable consideration.
-          </p>
-
-          <p>Yours faithfully,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      else if(type === "resignation-letter"){
-        html = `
-          <p>${escapeHtml(todayDate())}</p>
-          <p>
-            <strong>${escapeHtml(getValue("resRecipient") || "The Manager")}</strong><br>
-            ${escapeHtml(getValue("resRecipientPosition") || "")}<br>
-            ${escapeHtml(getValue("resCompany") || "Company Name")}
-          </p>
-
-          <p>Dear ${escapeHtml(getValue("resRecipient") || "Sir/Ma")},</p>
-
-          <p>
-            I am writing to formally resign from my position as <strong>${escapeHtml(getValue("resCurrentRole") || displayTitle)}</strong>, effective <strong>${escapeHtml(getValue("resEffectiveDate") || "as stated")}</strong>.
-          </p>
-
-          <p>
-            Reason for Resignation: ${escapeHtml(getValue("resReason") || "This decision was made after careful consideration.")}
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("resAppreciation") || "I sincerely appreciate the opportunity to have worked with the organization and the support I received during my time here.")}
-          </p>
-
-          <p>
-            ${escapeHtml(getValue("resTransition") || "I will do my best to ensure a smooth transition of my responsibilities.")}
-          </p>
-
-          <p>Thank you once again.</p>
-          <p>Yours sincerely,<br><strong>${escapeHtml(displayName)}</strong></p>
-        `;
-      }
-
-      document.getElementById("previewContent").innerHTML = html;
-      applyTemplate();
-      calculateResumeScore();
-      saveDraftToLocal();
-    }
-
-    function copyText(){
-      const preview = document.getElementById("previewContent").innerText;
-      navigator.clipboard.writeText(preview)
-        .then(() => alert("Document text copied successfully."))
-        .catch(() => alert("Unable to copy text."));
-    }
-
-    function printDocument(){
-      window.print();
-    }
-
-    async function downloadDocx() {
-      try {
-        const {
-          Document,
-          Packer,
-          Paragraph,
-          TextRun,
-          HeadingLevel,
-          AlignmentType,
-          ImageRun
-        } = window.docx;
-
-        const type = getValue("documentType");
-        const fileName = type.replaceAll("-", "_");
-        const preview = document.getElementById("previewContent");
-        const title = type.replaceAll("-", " ").toUpperCase();
-
-        const children = [];
-
-        children.push(
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: title,
-                bold: true,
-                font: "Times New Roman",
-                size: 28,
-                color: "000000"
-              })
-            ],
-            heading: HeadingLevel.TITLE,
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 200 }
-          })
-        );
-
-        if ((type === "cv" || type === "resume") && profilePhotoData) {
-          try {
-            const response = await fetch(profilePhotoData);
-            const blob = await response.blob();
-            const buffer = await blob.arrayBuffer();
-
-            children.push(
-              new Paragraph({
-                children: [
-                  new ImageRun({
-                    data: buffer,
-                    transformation: {
-                      width: 110,
-                      height: 110
-                    }
-                  })
-                ],
-                alignment: getValue("templateStyle") === "template-corporate"
-                  ? AlignmentType.LEFT
-                  : AlignmentType.RIGHT,
-                spacing: { after: 200 }
-              })
-            );
-          } catch (imgErr) {
-            console.log("Image skipped in DOCX:", imgErr);
-          }
-        }
-
-        const lines = preview.innerText
-          .split("\n")
-          .map(line => line.trim())
-          .filter(line => line !== "");
-
-        lines.forEach(line => {
-          children.push(
-            new Paragraph({
-              children: [
-                new TextRun({
-                  text: line,
-                  font: "Times New Roman",
-                  size: 24,
-                  color: "000000"
-                })
-              ],
-              alignment: AlignmentType.JUSTIFIED,
-              spacing: { after: 120 }
-            })
-          );
-        });
-
-        const doc = new Document({
-          sections: [
-            {
-              properties: {},
-              children
-            }
-          ]
-        });
-
-        const blob = await Packer.toBlob(doc);
-        saveAs(blob, `${fileName}.docx`);
-      } catch (error) {
-        console.error("DOCX export error:", error);
-        alert("DOCX download failed. Make sure you are connected to the internet and the export libraries are loaded.");
-      }
-    }
-
-    function saveDraftToLocal(){
-      const formData = {};
-      document.querySelectorAll("input, textarea, select").forEach(el => {
-        if(el.id && el.type !== "file") formData[el.id] = el.value;
-      });
-
-      const referees = [];
-      document.querySelectorAll(".referee-item").forEach(item => {
-        referees.push({
-          name: item.querySelector(".referee-name")?.value || "",
-          position: item.querySelector(".referee-position")?.value || "",
-          contact: item.querySelector(".referee-contact")?.value || ""
-        });
-      });
-
-      formData.referees = referees;
-      formData.profilePhotoData = profilePhotoData;
-      localStorage.setItem("docBuilderForm", JSON.stringify(formData));
-    }
-
-    function loadDraftFromLocal(){
-      const saved = localStorage.getItem("docBuilderForm");
-      if(!saved) return;
-
-      try{
-        const data = JSON.parse(saved);
-
-        Object.keys(data).forEach(key => {
-          if(key === "referees" || key === "profilePhotoData") return;
-          const el = document.getElementById(key);
-          if(el) el.value = data[key];
-        });
-
-        if(data.profilePhotoData){
-          profilePhotoData = data.profilePhotoData;
-        }
-
-        if(Array.isArray(data.referees)){
-          const container = document.getElementById("refereeContainer");
-          container.innerHTML = "";
-          data.referees.forEach((ref, index) => {
-            const block = document.createElement("div");
-            block.className = "referee-item border rounded-4 p-3 mb-3";
-            block.innerHTML = `
-              <div class="row g-3">
-                <div class="col-md-4">
-                  <input type="text" class="form-control referee-name" placeholder="Referee Name" value="${escapeHtml(ref.name || "")}">
-                </div>
-                <div class="col-md-4">
-                  <input type="text" class="form-control referee-position" placeholder="Position / Organization" value="${escapeHtml(ref.position || "")}">
-                </div>
-                <div class="col-md-3">
-                  <input type="text" class="form-control referee-contact" placeholder="Phone or Email" value="${escapeHtml(ref.contact || "")}">
-                </div>
-                <div class="col-md-1 d-flex align-items-center">
-                  ${index === 0 ? "" : `<button type="button" class="btn btn-danger w-100" onclick="this.closest('.referee-item').remove(); saveDraftToLocal();">×</button>`}
-                </div>
-              </div>
-            `;
-            container.appendChild(block);
-            attachRefereeInputListeners(block);
+      const titles = {
+        "Computer Science":["AI-Driven Student Performance Prediction","Cybersecurity Awareness in Nigerian Campuses","Mobile Learning App for Large Classes"],
+        "Public Health":["Determinants of Malaria Prevention Practices","Telemedicine Adoption Among Undergraduates","Mental Health Awareness and Help-Seeking"],
+        "Economics":["Inflation and Student Spending Behaviour","Impact of Digital Payment Adoption","Youth Unemployment and Skill Mismatch"],
+        "Electrical Engineering":["Solar Backup Optimization for Hostels","IoT-Based Energy Monitoring","Reliability Analysis of Campus Power Systems"],
+        "Business Administration":["Social Media Marketing for Student Startups","Entrepreneurship Intentions Among Undergraduates","Service Quality in Private Universities"],
+        "Mass Communication":["Fake News Detection Habits Among Students","Campus Radio and Civic Engagement","Effects of Influencer Marketing"],
+        "Nursing Science":["Clinical Training Challenges in Teaching Hospitals","Patient Safety Awareness","Infection Control Compliance"],
+        "Civil Engineering":["Low-Cost Building Materials in Nigeria","Drainage Design for Flood Control","Campus Road Maintenance Optimization"]
+      };
+      const levels = ["Undergraduate","Postgraduate"];
+      const db = { universities: [], departments: [], topics: [] };
+
+      universities.forEach((u, ui) => {
+        const uId = uid();
+        db.universities.push({ id:uId, name:u, faculty:"Sciences & Applied Studies" });
+        Object.keys(departments).forEach((d, di) => {
+          if ((ui + di) % 2 !== 0) return;
+          const deptId = uid();
+          db.departments.push({ id:deptId, universityId:uId, name:d });
+          const cats = departments[d];
+          titles[d].forEach((title, ti) => {
+            db.topics.push({
+              id:uid(), universityId:uId, departmentId:deptId, department:d,
+              title:`${title} in ${u}`,
+              abstract:`This study investigates ${title.toLowerCase()} with emphasis on Nigerian university contexts, practical interventions, and measurable outcomes for policy and implementation.`,
+              category:cats[Math.floor(seededRand(ui+di+ti)*cats.length)],
+              level:levels[Math.floor(seededRand((ui+1)*(di+1)*(ti+1))*2)]
+            });
           });
-
-          if(data.referees.length === 0){
-            addRefereeField();
-          }
-        }
-
-      } catch(e){}
-    }
-
-    function clearForm(){
-      localStorage.removeItem("docBuilderForm");
-      location.reload();
-    }
-
-    function attachFieldListeners(){
-      document.querySelectorAll("input, textarea, select").forEach(el => {
-        if(el.type === "file") return;
-        el.addEventListener("input", () => {
-          saveDraftToLocal();
-          calculateResumeScore();
-        });
-        el.addEventListener("change", () => {
-          saveDraftToLocal();
-          calculateResumeScore();
         });
       });
+      return db;
     }
 
-    function attachRefereeInputListeners(scope){
-      scope.querySelectorAll("input").forEach(el => {
-        el.addEventListener("input", saveDraftToLocal);
-        el.addEventListener("change", saveDraftToLocal);
-      });
+    function loadDB() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        const db = generateSeedData();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+        return db;
+      }
+      return JSON.parse(raw);
+    }
+    function saveDB(db) { localStorage.setItem(STORAGE_KEY, JSON.stringify(db)); }
+    function getBookmarks() { return JSON.parse(localStorage.getItem(BOOKMARK_KEY) || "[]"); }
+    function saveBookmarks(data) { localStorage.setItem(BOOKMARK_KEY, JSON.stringify(data)); }
+    function getMessages() { return JSON.parse(localStorage.getItem(MESSAGE_KEY) || "[]"); }
+
+    let db = loadDB();
+
+    function populateFilters() {
+      const uSel = document.getElementById("filterUniversity");
+      const dSel = document.getElementById("filterDepartment");
+      const cSel = document.getElementById("filterCategory");
+      const topicUni = document.getElementById("topicUniversity");
+      uSel.innerHTML = '<option value="">All Universities</option>' + db.universities.map(u => `<option value="${u.id}">${u.name}</option>`).join("");
+      topicUni.innerHTML = db.universities.map(u => `<option value="${u.id}">${u.name}</option>`).join("");
+      dSel.innerHTML = '<option value="">All Departments</option>' + [...new Set(db.departments.map(d => d.name))].sort().map(d => `<option>${d}</option>`).join("");
+      cSel.innerHTML += [...new Set(db.topics.map(t => t.category))].sort().map(c => `<option>${c}</option>`).join("");
+      document.getElementById("statUniversities").textContent = db.universities.length;
+      document.getElementById("statDepartments").textContent = db.departments.length;
+      document.getElementById("statTopics").textContent = db.topics.length;
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      loadTheme();
-      loadDraftFromLocal();
-      updateFormGroups();
-      attachFieldListeners();
-      document.querySelectorAll(".referee-item").forEach(attachRefereeInputListeners);
-      calculateResumeScore();
+    function renderTopics() {
+      const q = document.getElementById("globalSearch").value.toLowerCase().trim();
+      const u = document.getElementById("filterUniversity").value;
+      const d = document.getElementById("filterDepartment").value;
+      const l = document.getElementById("filterLevel").value;
+      const c = document.getElementById("filterCategory").value;
+      const grid = document.getElementById("topicsGrid");
+      const filtered = db.topics.filter(t =>
+        (!u || t.universityId === u) &&
+        (!d || t.department === d) &&
+        (!l || t.level === l) &&
+        (!c || t.category === c) &&
+        (!q || `${t.title} ${t.abstract} ${t.department}`.toLowerCase().includes(q))
+      );
+      grid.innerHTML = filtered.slice(0, 200).map(t => {
+        const uni = db.universities.find(u => u.id === t.universityId)?.name || "";
+        const isSaved = getBookmarks().includes(t.id);
+        return `<div class="col-lg-6"><div class="card-ui p-3 topic-card h-100">
+          <div class="d-flex justify-content-between gap-2"><h5 class="card-title">${t.title}</h5><button class="btn btn-sm ${isSaved ? "btn-warning" : "btn-outline-warning"}" onclick="toggleBookmark('${t.id}')"><i class="bi bi-bookmark${isSaved?'-fill':''}"></i></button></div>
+          <p class="small text-secondary mb-2">${uni} • ${t.department}</p>
+          <div class="d-flex gap-2 mb-2"><span class="pill">${t.category}</span><span class="pill">${t.level}</span></div>
+          <p class="mb-3">${t.abstract}</p>
+          <div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm" onclick="downloadTopicPDF('${t.id}')">Download PDF</button><button class="btn btn-outline-danger btn-sm" onclick="deleteTopic('${t.id}')">Delete</button></div>
+        </div></div>`;
+      }).join("") || '<p class="text-secondary">No matching topics found.</p>';
 
-      const photoInput = document.getElementById("profilePhoto");
-      photoInput.addEventListener("change", function (event) {
-        const file = event.target.files[0];
-        if (!file) return;
+      renderRecommendations(filtered);
+      renderBookmarks();
+    }
 
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          profilePhotoData = e.target.result;
-          saveDraftToLocal();
-        };
-        reader.readAsDataURL(file);
+    function renderRecommendations(list) {
+      const recBox = document.getElementById("recommendations");
+      const base = list[0] || db.topics[Math.floor(Math.random()*db.topics.length)];
+      if (!base) return;
+      const picks = db.topics.filter(t => t.id !== base.id && (t.department === base.department || t.category === base.category)).slice(0,4);
+      recBox.innerHTML = picks.map(t => `<div class="col-md-6"><div class="card-ui p-3 h-100"><strong>${t.title}</strong><p class="mb-0 small text-secondary mt-2">${t.abstract.slice(0,120)}...</p></div></div>`).join("");
+    }
+
+    function renderBookmarks() {
+      const ids = getBookmarks();
+      const items = db.topics.filter(t => ids.includes(t.id));
+      document.getElementById("bookmarks").innerHTML = items.map(t => `<div class="col-md-6"><div class="card-ui p-3 h-100"><strong>${t.title}</strong><p class="small text-secondary">${t.level} • ${t.category}</p></div></div>`).join("") || '<p class="text-secondary mb-0">No saved topics yet.</p>';
+    }
+
+    function toggleBookmark(id) {
+      const set = new Set(getBookmarks());
+      if (set.has(id)) set.delete(id); else set.add(id);
+      saveBookmarks([...set]);
+      renderTopics();
+    }
+    window.toggleBookmark = toggleBookmark;
+
+    function downloadTopicPDF(id) {
+      const t = db.topics.find(x => x.id === id); if (!t) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(16); doc.text("ProjectHelper Topic Sheet", 14, 18);
+      doc.setFontSize(12); doc.text(`Title: ${t.title}`, 14, 30, { maxWidth: 180 });
+      doc.text(`Department: ${t.department}`, 14, 44);
+      doc.text(`Category: ${t.category} | Level: ${t.level}`, 14, 52);
+      doc.text(`Abstract: ${t.abstract}`, 14, 64, { maxWidth: 180 });
+      doc.save(`${t.title.slice(0,40).replace(/\s+/g,'_')}.pdf`);
+    }
+    window.downloadTopicPDF = downloadTopicPDF;
+
+    function deleteTopic(id) {
+      if (!localStorage.getItem(ADMIN_AUTH_KEY)) return;
+      db.topics = db.topics.filter(t => t.id !== id);
+      saveDB(db);
+      renderTopics();
+      populateFilters();
+    }
+    window.deleteTopic = deleteTopic;
+
+    function renderServices() {
+      document.getElementById("servicesGrid").innerHTML = serviceItems.map(([name, desc], i) => `<div class="col-lg-4"><div class="card-ui p-4 h-100">
+        <div class="service-icon mb-3"><i class="bi bi-stars"></i></div><h5>${name}</h5><p class="text-secondary">${desc}</p><a href="#hire" class="btn btn-main">Hire Us / Order Now</a>
+      </div></div>`).join("");
+    }
+
+    function submitContact(e) {
+      e.preventDefault();
+      const payload = { id:uid(), name:contactName.value, email:contactEmail.value, message:contactMessage.value, createdAt:new Date().toISOString() };
+      const all = getMessages(); all.unshift(payload);
+      localStorage.setItem(MESSAGE_KEY, JSON.stringify(all));
+      e.target.reset(); alert("Message submitted successfully.");
+      renderMessages();
+    }
+
+    function renderMessages() {
+      const box = document.getElementById("messagesList");
+      box.innerHTML = getMessages().map(m => `<div class="list-group-item"><strong>${m.name}</strong> <span class="text-secondary">(${m.email})</span><p class="mb-1">${m.message}</p><small>${new Date(m.createdAt).toLocaleString()}</small></div>`).join("") || "<div class='text-secondary'>No messages yet.</div>";
+    }
+
+    function loginAdmin() {
+      const ok = adminEmail.value === "admin@projecthelper.ng" && adminPassword.value === "admin123";
+      if (!ok) return alert("Invalid admin credentials.");
+      localStorage.setItem(ADMIN_AUTH_KEY, "true");
+      syncAdminUI();
+    }
+
+    function syncAdminUI() {
+      const authed = !!localStorage.getItem(ADMIN_AUTH_KEY);
+      adminPanel.classList.toggle("d-none", !authed);
+      authBox.classList.toggle("d-none", authed);
+      if (authed) renderMessages();
+    }
+
+    function addUniversityDepartment() {
+      const uniName = newUniversity.value.trim();
+      const deptName = newDepartment.value.trim();
+      if (!uniName || !deptName) return;
+      let uni = db.universities.find(u => u.name.toLowerCase() === uniName.toLowerCase());
+      if (!uni) { uni = { id:uid(), name:uniName, faculty:"General" }; db.universities.push(uni); }
+      db.departments.push({ id:uid(), universityId:uni.id, name:deptName });
+      saveDB(db);
+      newUniversity.value = ""; newDepartment.value = "";
+      populateFilters(); renderTopics();
+    }
+
+    function addTopic() {
+      const title = topicTitle.value.trim();
+      if (!title) return;
+      db.topics.unshift({
+        id:uid(), universityId:topicUniversity.value, departmentId:uid(), department:topicDepartment.value.trim(),
+        title, abstract:topicAbstract.value.trim(), category:topicCategory.value.trim() || "Education", level:topicLevel.value
       });
-    });
+      if (!db.departments.find(d => d.universityId === topicUniversity.value && d.name.toLowerCase() === topicDepartment.value.trim().toLowerCase())) {
+        db.departments.push({ id:uid(), universityId:topicUniversity.value, name:topicDepartment.value.trim() });
+      }
+      saveDB(db);
+      [topicTitle,topicDepartment,topicAbstract,topicCategory].forEach(i => i.value = "");
+      populateFilters(); renderTopics();
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-theme", saved);
+      themeToggle.onclick = () => {
+        const now = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", now);
+        localStorage.setItem("theme", now);
+      };
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", submitContact);
+    document.getElementById("loginBtn").addEventListener("click", loginAdmin);
+    document.getElementById("logoutBtn").addEventListener("click", () => { localStorage.removeItem(ADMIN_AUTH_KEY); syncAdminUI(); });
+    document.getElementById("addDeptBtn").addEventListener("click", addUniversityDepartment);
+    document.getElementById("addTopicBtn").addEventListener("click", addTopic);
+    ["globalSearch","filterUniversity","filterDepartment","filterLevel","filterCategory"].forEach(id => document.getElementById(id).addEventListener("input", renderTopics));
+
+    renderServices();
+    populateFilters();
+    renderTopics();
+    syncAdminUI();
+    initTheme();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
