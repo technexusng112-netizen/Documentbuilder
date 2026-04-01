@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+enum StudyLevel {
+  UNDERGRADUATE
+  POSTGRADUATE
+}
+
+model User {
+  id            String        @id @default(cuid())
+  name          String?
+  email         String        @unique
+  passwordHash  String?
+  phone         String?
+  role          UserRole      @default(STUDENT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  bookmarks     Bookmark[]
+  serviceOrders ServiceRequest[]
+  contactMsgs   ContactMessage[]
+  adminProfile  Admin?
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model University {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  state       String
+  faculties   Faculty[]
+  topics      Topic[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Faculty {
+  id           String       @id @default(cuid())
+  name         String
+  universityId String
+  university   University   @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  departments  Department[]
+  topics       Topic[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([name, universityId])
+}
+
+model Department {
+  id         String    @id @default(cuid())
+  name       String
+  facultyId  String
+  faculty    Faculty   @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  topics     Topic[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@unique([name, facultyId])
+}
+
+model TopicCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  topics    Topic[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Topic {
+  id            String       @id @default(cuid())
+  title         String
+  abstract      String
+  level         StudyLevel
+  tags          String[]
+  universityId  String
+  facultyId     String
+  departmentId  String
+  categoryId    String
+  university    University   @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  faculty       Faculty      @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  department    Department   @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  category      TopicCategory @relation(fields: [categoryId], references: [id])
+  bookmarks     Bookmark[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([departmentId, level, categoryId])
+  @@index([title])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  topicId   String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, topicId])
+}
+
+model ContactMessage {
+  id          String   @id @default(cuid())
+  userId      String?
+  name        String
+  email       String
+  phone       String
+  department  String
+  level       StudyLevel
+  message     String
+  serviceType String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+}
+
+model ServiceRequest {
+  id          String   @id @default(cuid())
+  userId      String?
+  name        String
+  email       String
+  phone       String
+  department  String
+  level       StudyLevel
+  message     String
+  serviceType String
+  status      String   @default("new")
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+}
